@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Autor: {{ autor.nombre }} {{ autor.apellido }}</h1>
+  <p>{{ autor.agno_nacimiento}}</p>
+  
+hola mundi
+<h1>libros</h1>
+{% for libro in autor.libro_set.all%}
+
+<p><strong>libro:</strong> <a href="{{ libro.get_absolute_url }}">{{ libro.titulo }}</a> 
+<strong>({{ libro.id}})</strong></p> 
+  <p> {{libro.sinopsis}}</p>
+  {% endfor %}
+{% endblock %}
+<!-- no poner el endblock despues de un monton de texto comentado :v, luego corregir la linea 12 para que solo
+  cuente en orden los libros escritos por el autor en especifico
+  
+  <p><strong>Libros:</strong> <a href="{% url 'detalle_autor' libro.autor.pk %}">{{ libro.autor }}</a></p>  author detail link not yet defined 
+  <p><strong>Sinopsis:</strong> {{ libro.sinopsis }}</p>
+  <p><strong>ISBN:</strong> {{ libro.isbn }}</p>
+  <p><strong>idioma:</strong> {{ libro.idioma }}</p>
+  <p><strong>Genero:</strong> {% for genero in libro.genero.all %} {{ genero }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Copias</h4>
+
+    {% for copy in libro.libroinstance_set.all %}
+    <hr>
+    <p class="{% if copy.status == 'a' %}text-success{% elif copy.status == 'm' %}text-danger{% else %}text-warning{% endif %}">{{ copy.get_status_display }}</p>
+    {% if copy.status != 'a' %}<p><strong>Due to be returned:</strong> {{copy.due_back}}</p>{% endif %}
+    <p><strong>Imprint:</strong> {{copy.impreso}}</p>
+    <p class="text-muted"><strong>Id:</strong> {{copy.id}}</p>
+    {% endfor %}
+  </div>  
+-->
+
